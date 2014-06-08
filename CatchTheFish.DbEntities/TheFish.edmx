@@ -14,6 +14,7 @@
           <Property Name="Volumn" Type="int" />
           <Property Name="Price" Type="money" />
           <Property Name="PriceChangePercentage" Type="int" />
+          <Property Name="HasMessageSent" Type="int" />
           <Property Name="WhenCreated" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="CompanyList">
@@ -69,6 +70,7 @@
           <Property Name="Volumn" Type="Int32" />
           <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="PriceChangePercentage" Type="Int32" />
+          <Property Name="HasMessageSent" Type="Int32" />
           <Property Name="WhenCreated" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
       </Schema>
@@ -98,6 +100,7 @@
             <EntityTypeMapping TypeName="TheFishModel.CatchedFish">
               <MappingFragment StoreEntitySet="CatchedFish">
                 <ScalarProperty Name="WhenCreated" ColumnName="WhenCreated" />
+                <ScalarProperty Name="HasMessageSent" ColumnName="HasMessageSent" />
                 <ScalarProperty Name="PriceChangePercentage" ColumnName="PriceChangePercentage" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Volumn" ColumnName="Volumn" />
