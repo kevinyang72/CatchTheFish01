@@ -18,8 +18,8 @@ namespace CatchTheFish.DbEntities
         public string Symbol { get; set; }
         public Nullable<int> Volumn { get; set; }
         public Nullable<decimal> Price { get; set; }
-        public Nullable<int> PriceChangePercentage { get; set; }
-        public Nullable<int> HasMessageSent { get; set; }
+        public Nullable<decimal> PriceChangePercentage { get; set; }
+        public Nullable<int> IsMessageSent { get; set; }
         public System.DateTime WhenCreated { get; set; }
     }
 }
