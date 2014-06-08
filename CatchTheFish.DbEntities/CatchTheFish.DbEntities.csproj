@@ -48,12 +48,52 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CatchTheFishModel.cs" />
+    <Compile Include="CatchedFish.cs">
+      <DependentUpon>TheFish.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CompanyList.cs">
+      <DependentUpon>TheFish.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TheFish.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TheFish.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TheFish.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TheFish.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TheFish.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TheFish.edmx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <EntityDeploy Include="TheFish.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TheFish.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="TheFish.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TheFish.edmx</DependentUpon>
+      <LastGenOutput>TheFish.Context.cs</LastGenOutput>
+    </None>
+    <None Include="TheFish.edmx.diagram">
+      <DependentUpon>TheFish.edmx</DependentUpon>
+    </None>
+    <None Include="TheFish.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TheFish.edmx</DependentUpon>
+      <LastGenOutput>TheFish.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
