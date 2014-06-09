@@ -26,7 +26,7 @@ namespace CatchTheFish.CollectData
             var averageVolume = quote.AverageDailyVolume;
             var volume = quote.Volume;
 
-            if(volume > averageVolume)
+            if(volume > averageVolume && averageVolume > 0)
             {
                 if (volume / averageVolume > VolumeAbnormalTimes)
                     return true;
