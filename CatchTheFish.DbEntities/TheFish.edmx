@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TheFishModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CatchedFish">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Symbol" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Volumn" Type="int" />
+          <Property Name="Price" Type="money" />
+          <Property Name="PriceChangePercentage" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="IsMessageSent" Type="int" />
+          <Property Name="WhenCreated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanyList">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Symbol" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastSale" Type="float" />
+          <Property Name="MarketCap" Type="float" />
+          <Property Name="AdrTso" Type="nvarchar" MaxLength="255" />
+          <Property Name="IPOyear" Type="nvarchar" MaxLength="255" />
+          <Property Name="Sector" Type="nvarchar" MaxLength="255" />
+          <Property Name="industry" Type="nvarchar" MaxLength="255" />
+          <Property Name="SummaryQuote" Type="nvarchar" MaxLength="255" />
+          <Property Name="Exchange" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="TheFishModelStoreContainer">
+          <EntitySet Name="CatchedFish" EntityType="Self.CatchedFish" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyList" EntityType="Self.CompanyList" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TheFishModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CompanyList">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Symbol" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastSale" Type="Double" />
+          <Property Name="MarketCap" Type="Double" />
+          <Property Name="AdrTso" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IPOyear" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Sector" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="industry" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SummaryQuote" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Exchange" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="TheFishEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CompanyLists" EntityType="Self.CompanyList" />
+          <EntitySet Name="CatchedFish" EntityType="TheFishModel.CatchedFish" />
+        </EntityContainer>
+        <EntityType Name="CatchedFish">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Symbol" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Volumn" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PriceChangePercentage" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IsMessageSent" Type="Int32" />
+          <Property Name="WhenCreated" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TheFishModelStoreContainer" CdmEntityContainer="TheFishEntities">
+          <EntitySetMapping Name="CompanyLists">
+            <EntityTypeMapping TypeName="TheFishModel.CompanyList">
+              <MappingFragment StoreEntitySet="CompanyList">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LastSale" ColumnName="LastSale" />
+                <ScalarProperty Name="MarketCap" ColumnName="MarketCap" />
+                <ScalarProperty Name="AdrTso" ColumnName="AdrTso" />
+                <ScalarProperty Name="IPOyear" ColumnName="IPOyear" />
+                <ScalarProperty Name="Sector" ColumnName="Sector" />
+                <ScalarProperty Name="industry" ColumnName="industry" />
+                <ScalarProperty Name="SummaryQuote" ColumnName="SummaryQuote" />
+                <ScalarProperty Name="Exchange" ColumnName="Exchange" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CatchedFish">
+            <EntityTypeMapping TypeName="TheFishModel.CatchedFish">
+              <MappingFragment StoreEntitySet="CatchedFish">
+                <ScalarProperty Name="WhenCreated" ColumnName="WhenCreated" />
+                <ScalarProperty Name="IsMessageSent" ColumnName="IsMessageSent" />
+                <ScalarProperty Name="PriceChangePercentage" ColumnName="PriceChangePercentage" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Volumn" ColumnName="Volumn" />
+                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
