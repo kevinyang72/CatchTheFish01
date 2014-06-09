@@ -16,6 +16,7 @@ namespace CatchTheFish.CollectData
 {
     public class CollectDataManager
     {
+        private const int StockFetchTrunk = 20;
         public static void DownloadTickers()
         {
             
@@ -32,24 +33,46 @@ namespace CatchTheFish.CollectData
                  boList = db.CompanyLists.Where(x=>x.Sector.Equals("Health care",StringComparison.OrdinalIgnoreCase)).ToList();
             }
 
-            //int i = 0;
+            int i = 1;
+            var quoteSingleCollectionTrunk = new ObservableCollection<Quote>();
             foreach(var item in boList)
             {
                 //if (i > 2)
                 //    break;
                 try
                 {
-                    var quoteSingleCollection = new ObservableCollection<Quote>();
+                    
                     var quote = new Quote(item.Symbol.Trim());
-                    quoteSingleCollection.Add(quote);
-                    YahooStockEngine.Fetch(quoteSingleCollection);
-                    quoteList.Add(quoteSingleCollection.FirstOrDefault());
+                    quoteSingleCollectionTrunk.Add(quote);
+                    if (i == StockFetchTrunk)
+                    {
+                        YahooStockEngine.Fetch(quoteSingleCollectionTrunk);
+                        foreach (var stockInfo in quoteSingleCollectionTrunk)
+                            quoteList.Add(stockInfo);
+                        quoteSingleCollectionTrunk = new ObservableCollection<Quote>();
+                        i = 1;
+                    }
+                    i++;
                 }catch(Exception ex)
                 {
                     var message = ex.Message;
                 }
                 //i++;
             }
+
+            try
+            {
+                if (quoteSingleCollectionTrunk.Count > 0)
+                {
+                    YahooStockEngine.Fetch(quoteSingleCollectionTrunk);
+                    foreach (var stockInfo in quoteSingleCollectionTrunk)
+                        quoteList.Add(stockInfo);
+                }
+            }catch(Exception ex)
+            {
+                var message = ex.Message;
+            }
+
             DateTime today = DateTime.Today;                    // earliest time today 
             DateTime tomorrow = DateTime.Today.AddDays(1);      // earliest time tomorrow
 
@@ -61,14 +84,15 @@ namespace CatchTheFish.CollectData
                 {
                     if (!analyzer.IsTheFish(item))
                         continue;
-                    if (db.CatchedFish.Where(x => x.Symbol.Equals(item.Symbol) && x.WhenCreated > today && x.WhenCreated<tomorrow).Any())
+                    if (db.CaughtFish.Where(x => x.Symbol.Equals(item.Symbol) && x.WhenCreated > today && x.WhenCreated<tomorrow).Any())
                         continue;
-                    var catchedFish = new CatchedFish();
-                    catchedFish.Symbol = item.Symbol;
-                    catchedFish.WhenCreated = DateTime.Now;
-                    catchedFish.Price = item.LastTradePrice;
-                    catchedFish.PriceChangePercentage = item.ChangeInPercent;
-                    db.CatchedFish.Add(catchedFish);
+                    var caughtFish = new CaughtFish();
+                    caughtFish.Symbol = item.Symbol;
+                    caughtFish.WhenCreated = DateTime.Now;
+                    caughtFish.Price = item.LastTradePrice;
+                    caughtFish.PriceChangePercentage = item.ChangeInPercent;
+                    caughtFish.Volume = item.Volume;
+                    db.CaughtFish.Add(caughtFish);
                     db.SaveChanges();
                     Messaging.SendEmailGmail("Symbol:" + item.Symbol + " Price:" + item.LastTradePrice + " Volume:" + item.Volume +" Previous Close Price:" + item.PreviousClose);
                     //}

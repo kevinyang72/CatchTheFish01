@@ -12,11 +12,11 @@ namespace CatchTheFish.DbEntities
     using System;
     using System.Collections.Generic;
     
-    public partial class CatchedFish
+    public partial class CaughtFish
     {
         public long Id { get; set; }
         public string Symbol { get; set; }
-        public Nullable<int> Volumn { get; set; }
+        public Nullable<decimal> Volume { get; set; }
         public Nullable<decimal> Price { get; set; }
         public Nullable<decimal> PriceChangePercentage { get; set; }
         public Nullable<int> IsMessageSent { get; set; }

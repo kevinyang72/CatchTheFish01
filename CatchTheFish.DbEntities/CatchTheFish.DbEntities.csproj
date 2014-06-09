@@ -48,7 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CatchedFish.cs">
+    <Compile Include="CaughtFish.cs">
       <DependentUpon>TheFish.tt</DependentUpon>
     </Compile>
     <Compile Include="CompanyList.cs">
