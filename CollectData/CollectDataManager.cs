@@ -9,7 +9,10 @@ using System.Threading.Tasks;
 using CatchTheFish.DbEntities;
 using Jarloo.CardStock.Helpers;
 using Jarloo.CardStock.Models;
+<<<<<<< HEAD
 using Core.Messaging;
+=======
+>>>>>>> fbc9f45256b3d12fef8dd70e59082359519b6f0f
 
 namespace CatchTheFish.CollectData
 {
@@ -30,6 +33,7 @@ namespace CatchTheFish.CollectData
             {
                  boList = db.CompanyLists.Where(x=>x.Sector.Equals("Health care",StringComparison.OrdinalIgnoreCase)).ToList();
             }
+<<<<<<< HEAD
             int i = 0;
             foreach(var item in boList)
             {
@@ -77,5 +81,40 @@ namespace CatchTheFish.CollectData
         }
 
         
+=======
+                foreach(var item in boList)
+                {
+                    try
+                    {
+                        var quoteSingleCollection = new ObservableCollection<Quote>();
+                        var quote = new Quote(item.Symbol.Trim());
+                        quoteSingleCollection.Add(quote);
+                        YahooStockEngine.Fetch(quoteSingleCollection);
+                        quoteList.Add(quoteSingleCollection.FirstOrDefault());
+                    }catch(Exception ex)
+                    {
+                        var message = ex.Message;
+                    }
+                }
+                using (var db = new TheFishEntities())
+                {
+                    foreach(var item in quoteList.ToList())
+                    {
+                        //if(item.ChangeInPercent > 20)
+                        //{
+                            var catchedFish = new CatchedFish();
+                            catchedFish.Symbol = item.Symbol;
+                            catchedFish.WhenCreated = DateTime.Now;
+                            catchedFish.Price = item.LastTradePrice;
+                            catchedFish.PriceChangePercentage = item.ChangeInPercent;
+                            db.CatchedFish.Add(catchedFish);
+                            db.SaveChanges();
+                        //}
+                    }
+                }
+                
+            
+        }
+>>>>>>> fbc9f45256b3d12fef8dd70e59082359519b6f0f
     }
 }
