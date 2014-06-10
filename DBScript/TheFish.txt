@@ -1,0 +1,66 @@
+USE [TheFish]
+GO
+
+/****** Object:  Table [dbo].[CaughtFish]    Script Date: 6/9/2014 9:00:50 PM ******/
+DROP TABLE [dbo].[CaughtFish]
+GO
+
+/****** Object:  Table [dbo].[CaughtFish]    Script Date: 6/9/2014 9:00:50 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[CaughtFish](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[Symbol] [nchar](20) NOT NULL,
+	[Volume] [decimal](18, 0) NULL,
+	[Price] [money] NULL,
+	[PriceChangePercentage] [decimal](18, 0) NULL,
+	[IsMessageSent] [int] NULL,
+	[WhenCreated] [datetime] NOT NULL,
+ CONSTRAINT [PK_CaughtFish] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+
+USE [TheFish]
+GO
+
+/****** Object:  Table [dbo].[CompanyList]    Script Date: 6/9/2014 9:00:57 PM ******/
+DROP TABLE [dbo].[CompanyList]
+GO
+
+/****** Object:  Table [dbo].[CompanyList]    Script Date: 6/9/2014 9:00:57 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[CompanyList](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[Symbol] [nvarchar](255) NOT NULL,
+	[Name] [nvarchar](255) NULL,
+	[LastSale] [float] NULL,
+	[MarketCap] [float] NULL,
+	[AdrTso] [nvarchar](255) NULL,
+	[IPOyear] [nvarchar](255) NULL,
+	[Sector] [nvarchar](255) NULL,
+	[industry] [nvarchar](255) NULL,
+	[SummaryQuote] [nvarchar](255) NULL,
+	[Exchange] [nvarchar](20) NOT NULL,
+ CONSTRAINT [PK_CompanyList] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+

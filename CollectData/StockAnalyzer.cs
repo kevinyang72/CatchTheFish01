@@ -35,7 +35,7 @@ namespace CatchTheFish.CollectData
             return false;
         }
 
-        private bool IsPriceChangedDramatically(Quote quote)
+        public bool IsPriceChangedDramatically(Quote quote)
         {
             var price = quote.LastTradePrice;
             var lastClosedPrice = quote.PreviousClose;

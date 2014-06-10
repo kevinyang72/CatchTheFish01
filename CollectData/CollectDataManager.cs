@@ -30,7 +30,7 @@ namespace CatchTheFish.CollectData
             var boList = new List<CompanyList>();
             using(var db=new TheFishEntities())
             {
-                 boList = db.CompanyLists.Where(x=>x.Sector.Equals("Health care",StringComparison.OrdinalIgnoreCase)).ToList();
+                 boList = db.CompanyLists.Where(x=>x.Sector.Equals("Health care",StringComparison.OrdinalIgnoreCase) && x.Symbol.Length<5 ).ToList();
             }
 
             int i = 1;
@@ -82,7 +82,9 @@ namespace CatchTheFish.CollectData
                 
                 foreach(var item in quoteList.ToList())
                 {
-                    if (!analyzer.IsTheFish(item))
+                    var isPriceChangeFish = analyzer.IsPriceChangedDramatically(item);
+                    var isVolumeChangeFish = analyzer.IsVolumeAbnormal(item);
+                    if (!(isPriceChangeFish || isVolumeChangeFish))
                         continue;
                     if (db.CaughtFish.Where(x => x.Symbol.Equals(item.Symbol) && x.WhenCreated > today && x.WhenCreated<tomorrow).Any())
                         continue;
@@ -92,6 +94,10 @@ namespace CatchTheFish.CollectData
                     caughtFish.Price = item.LastTradePrice;
                     caughtFish.PriceChangePercentage = item.ChangeInPercent;
                     caughtFish.Volume = item.Volume;
+                    if (isPriceChangeFish)
+                        caughtFish.FishType = 0;
+                    else if (isVolumeChangeFish)
+                        caughtFish.FishType = 1;
                     db.CaughtFish.Add(caughtFish);
                     db.SaveChanges();
                     Messaging.SendEmailGmail("Symbol:" + item.Symbol + " Price:" + item.LastTradePrice + " Volume:" + item.Volume +" Previous Close Price:" + item.PreviousClose);

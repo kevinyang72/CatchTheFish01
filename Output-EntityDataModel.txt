@@ -1,0 +1,9 @@
+﻿Generated model file: TheFish.edmx.
+Loading metadata from the database took 00:00:01.5013061.
+Generating the model took 00:00:01.4408378.
+Generated model file: TheFish.edmx.
+Loading metadata from the database took 00:00:00.3956311.
+Generating the model took 00:00:00.2844131.
+Generated model file: TheFish.edmx.
+Loading metadata from the database took 00:00:00.5007406.
+Generating the model took 00:00:00.3849037.
