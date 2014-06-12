@@ -57,9 +57,12 @@
   <ItemGroup>
     <Compile Include="CollectDataManager.cs" />
     <Compile Include="Models\Quote.cs" />
+    <Compile Include="Models\StockQuote.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StockAnalyzer.cs" />
+    <Compile Include="StockAnalyzerResult.cs" />
+    <Compile Include="YahooStockDownoad.cs" />
     <Compile Include="YahooStockEngine.cs" />
   </ItemGroup>
   <ItemGroup>

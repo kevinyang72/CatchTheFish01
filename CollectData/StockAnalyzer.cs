@@ -11,7 +11,17 @@ namespace CatchTheFish.CollectData
     {
         private const int VolumeAbnormalTimes = 5;
         private const int PricePercentageChangeInt = 20;
-        public bool IsTheFish(Quote quote)
+
+        public StockAnalyzerResult AnalyzeStock(Quote quote)
+        {
+            var result = new StockAnalyzerResult();
+            result.IsPriceChangedDramatically = IsPriceChangedDramatically(quote);
+            result.IsVolumeAbnormal = IsVolumeAbnormal(quote);
+            result.IsPrice52WeeksLow = IsPrice52WeeksLow(quote);
+            return result;
+
+        }
+        private bool IsTheFish(Quote quote)
         {
             if (IsPriceChangedDramatically(quote))
                 return true;
@@ -21,7 +31,7 @@ namespace CatchTheFish.CollectData
             return false;
         }
 
-        public bool IsVolumeAbnormal(Quote quote)
+        private bool IsVolumeAbnormal(Quote quote)
         {
             var averageVolume = quote.AverageDailyVolume;
             var volume = quote.Volume;
@@ -35,7 +45,7 @@ namespace CatchTheFish.CollectData
             return false;
         }
 
-        public bool IsPriceChangedDramatically(Quote quote)
+        private bool IsPriceChangedDramatically(Quote quote)
         {
             var price = quote.LastTradePrice;
             var lastClosedPrice = quote.PreviousClose;
@@ -44,6 +54,13 @@ namespace CatchTheFish.CollectData
                 if ((lastClosedPrice - price) * 100 / lastClosedPrice > PricePercentageChangeInt)
                     return true;
             }
+            return false;
+        }
+
+        private bool IsPrice52WeeksLow(Quote quote)
+        {
+            if (quote.LastTradePrice < quote.YearlyLow)
+                return true;
             return false;
         }
     }

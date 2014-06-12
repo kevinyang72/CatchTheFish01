@@ -10,6 +10,7 @@ using CatchTheFish.DbEntities;
 using Jarloo.CardStock.Helpers;
 using Jarloo.CardStock.Models;
 using Core.Messaging;
+using CatchTheFish.CollectData.Models;
 
 
 namespace CatchTheFish.CollectData
@@ -36,6 +37,7 @@ namespace CatchTheFish.CollectData
 
             int i = 1;
             var quoteSingleCollectionTrunk = new ObservableCollection<Quote>();
+            var quoteYahooDownloadDict = new Dictionary<string, StockQuote>();
             foreach(var item in boList)
             {
                 //if (i > 2)
@@ -45,6 +47,7 @@ namespace CatchTheFish.CollectData
                     
                     var quote = new Quote(item.Symbol.Trim());
                     quoteSingleCollectionTrunk.Add(quote);
+                    quoteYahooDownloadDict.Add(item.Symbol, null);
                     if (i == StockFetchTrunk)
                     {
                         YahooStockEngine.Fetch(quoteSingleCollectionTrunk);
@@ -83,8 +86,10 @@ namespace CatchTheFish.CollectData
                 
                 foreach(var item in quoteList.ToList())
                 {
-                    var isPriceChangeFish = analyzer.IsPriceChangedDramatically(item);
-                    var isVolumeChangeFish = analyzer.IsVolumeAbnormal(item);
+                    var result = analyzer.AnalyzeStock(item);
+                    var isPriceChangeFish = result.IsPriceChangedDramatically;
+                    var isVolumeChangeFish = result.IsVolumeAbnormal;
+                    var isPrice52WeeksLow = result.IsPrice52WeeksLow;
                     if (!(isPriceChangeFish || isVolumeChangeFish))
                         continue;
                     if (db.CaughtFish.Where(x => x.Symbol.Equals(item.Symbol) && x.WhenCreated > today && x.WhenCreated<tomorrow).Any())
@@ -107,6 +112,11 @@ namespace CatchTheFish.CollectData
                     {
                         caughtFish.FishType = 1;
                         message = string.Format(MessageText, "Volume Change Alert -- ", caughtFish.Symbol, caughtFish.Price.ToString(), caughtFish.PriceChangePercentage.ToString(), caughtFish.Volume.ToString(), caughtFish.VolumeChangePercentage.ToString());
+                    }
+                    else if (isPrice52WeeksLow)
+                    {
+                        caughtFish.FishType = 1;
+                        message = string.Format(MessageText, "52 Weeks low price Alert -- ", caughtFish.Symbol, caughtFish.Price.ToString(), caughtFish.PriceChangePercentage.ToString(), caughtFish.Volume.ToString(), caughtFish.VolumeChangePercentage.ToString());
                     }
                     db.CaughtFish.Add(caughtFish);
                     db.SaveChanges();
