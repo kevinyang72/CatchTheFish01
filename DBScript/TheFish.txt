@@ -1,11 +1,11 @@
 USE [TheFish]
 GO
 
-/****** Object:  Table [dbo].[CaughtFish]    Script Date: 6/9/2014 9:00:50 PM ******/
+/****** Object:  Table [dbo].[CaughtFish]    Script Date: 6/11/2014 6:59:42 PM ******/
 DROP TABLE [dbo].[CaughtFish]
 GO
 
-/****** Object:  Table [dbo].[CaughtFish]    Script Date: 6/9/2014 9:00:50 PM ******/
+/****** Object:  Table [dbo].[CaughtFish]    Script Date: 6/11/2014 6:59:43 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -20,11 +20,13 @@ CREATE TABLE [dbo].[CaughtFish](
 	[PriceChangePercentage] [decimal](18, 0) NULL,
 	[IsMessageSent] [int] NULL,
 	[WhenCreated] [datetime] NOT NULL,
+	[FishType] [int] NULL,
+	[VolumeChangePercentage] [decimal](18, 0) NULL,
  CONSTRAINT [PK_CaughtFish] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+)
 
 GO
 
@@ -32,11 +34,11 @@ GO
 USE [TheFish]
 GO
 
-/****** Object:  Table [dbo].[CompanyList]    Script Date: 6/9/2014 9:00:57 PM ******/
+/****** Object:  Table [dbo].[CompanyList]    Script Date: 6/11/2014 7:00:20 PM ******/
 DROP TABLE [dbo].[CompanyList]
 GO
 
-/****** Object:  Table [dbo].[CompanyList]    Script Date: 6/9/2014 9:00:57 PM ******/
+/****** Object:  Table [dbo].[CompanyList]    Script Date: 6/11/2014 7:00:20 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -58,9 +60,10 @@ CREATE TABLE [dbo].[CompanyList](
  CONSTRAINT [PK_CompanyList] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+)
 
 GO
+
 
 

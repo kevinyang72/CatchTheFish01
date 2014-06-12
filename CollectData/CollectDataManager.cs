@@ -17,6 +17,7 @@ namespace CatchTheFish.CollectData
     public class CollectDataManager
     {
         private const int StockFetchTrunk = 20;
+        public const string MessageText = @"{0}! Symbol: {1} Price: {2} Price Change: {3} Volume: {4} Volume Change: {5}";
         public static void DownloadTickers()
         {
             
@@ -94,13 +95,21 @@ namespace CatchTheFish.CollectData
                     caughtFish.Price = item.LastTradePrice;
                     caughtFish.PriceChangePercentage = item.ChangeInPercent;
                     caughtFish.Volume = item.Volume;
+                    caughtFish.VolumeChangePercentage = 0;
+                    var message = "";
                     if (isPriceChangeFish)
+                    {
                         caughtFish.FishType = 0;
+                        message = string.Format(MessageText, "Price Change Alert -- ", caughtFish.Symbol, caughtFish.Price.ToString(), caughtFish.PriceChangePercentage.ToString(), caughtFish.Volume.ToString(), caughtFish.VolumeChangePercentage);
+                    }
                     else if (isVolumeChangeFish)
+                    {
                         caughtFish.FishType = 1;
+                        message = string.Format(MessageText, "Volume Change Alert -- ", caughtFish.Symbol, caughtFish.Price.ToString(), caughtFish.PriceChangePercentage.ToString(), caughtFish.Volume.ToString(), caughtFish.VolumeChangePercentage.ToString());
+                    }
                     db.CaughtFish.Add(caughtFish);
                     db.SaveChanges();
-                    Messaging.SendEmailGmail("Symbol:" + item.Symbol + " Price:" + item.LastTradePrice + " Volume:" + item.Volume +" Previous Close Price:" + item.PreviousClose);
+                    Messaging.SendEmailGmail(message);
                     //}
                 }
             }
