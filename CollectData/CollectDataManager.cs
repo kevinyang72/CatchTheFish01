@@ -17,7 +17,7 @@ namespace CatchTheFish.CollectData
     public class CollectDataManager
     {
         private const int StockFetchTrunk = 20;
-        public const string MessageText = @"{0}! Symbol: {1} Price: {2} Price Change: {3} Volume: {4} Volume Change: {5}";
+        public const string MessageText = @"{0} Symbol: {1} Price: {2} Price Change: {3}% Volume: {4} Volume Change: {5}% ";
         public static void DownloadTickers()
         {
             
@@ -95,7 +95,8 @@ namespace CatchTheFish.CollectData
                     caughtFish.Price = item.LastTradePrice;
                     caughtFish.PriceChangePercentage = item.ChangeInPercent;
                     caughtFish.Volume = item.Volume;
-                    caughtFish.VolumeChangePercentage = 0;
+                    if(item.AverageDailyVolume> 0 && item.Volume>0)
+                        caughtFish.VolumeChangePercentage = (int)(0.5M + 100M * (item.Volume - item.AverageDailyVolume) / item.AverageDailyVolume);
                     var message = "";
                     if (isPriceChangeFish)
                     {
