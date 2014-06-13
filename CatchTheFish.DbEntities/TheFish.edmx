@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="TheFishModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="TheFishModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CaughtFish">
           <Key>
             <PropertyRef Name="Id" />
@@ -12,12 +12,12 @@
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Symbol" Type="nchar" MaxLength="20" Nullable="false" />
           <Property Name="Volume" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="VolumeChangePercentage" Type="decimal" Precision="18" Scale="0" />
           <Property Name="Price" Type="money" />
           <Property Name="PriceChangePercentage" Type="decimal" Precision="18" Scale="0" />
           <Property Name="IsMessageSent" Type="int" />
-          <Property Name="FishType" Type="int" Nullable="false" />
           <Property Name="WhenCreated" Type="datetime" Nullable="false" />
+          <Property Name="FishType" Type="int" />
+          <Property Name="VolumeChangePercentage" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="CompanyList">
           <Key>
@@ -39,10 +39,25 @@
           <EntitySet Name="CaughtFish" EntityType="Self.CaughtFish" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompanyList" EntityType="Self.CompanyList" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="TheFishModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="TheFishModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CaughtFish">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Symbol" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Volume" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PriceChangePercentage" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IsMessageSent" Type="Int32" />
+          <Property Name="WhenCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FishType" Type="Int32" />
+          <Property Name="VolumeChangePercentage" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
         <EntityType Name="CompanyList">
           <Key>
             <PropertyRef Name="id" />
@@ -60,29 +75,30 @@
           <Property Name="Exchange" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityContainer Name="TheFishEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CaughtFish" EntityType="Self.CaughtFish" />
           <EntitySet Name="CompanyLists" EntityType="Self.CompanyList" />
-          <EntitySet Name="CaughtFish" EntityType="TheFishModel.CaughtFish" />
         </EntityContainer>
-        <EntityType Name="CaughtFish">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Symbol" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
-          <Property Name="Volume" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="VolumeChangePercentage" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="PriceChangePercentage" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="IsMessageSent" Type="Int32" />
-          <Property Name="FishType" Type="Int32" Nullable="false" />
-          <Property Name="WhenCreated" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="TheFishModelStoreContainer" CdmEntityContainer="TheFishEntities">
+          <EntitySetMapping Name="CaughtFish">
+            <EntityTypeMapping TypeName="TheFishModel.CaughtFish">
+              <MappingFragment StoreEntitySet="CaughtFish">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="PriceChangePercentage" ColumnName="PriceChangePercentage" />
+                <ScalarProperty Name="IsMessageSent" ColumnName="IsMessageSent" />
+                <ScalarProperty Name="WhenCreated" ColumnName="WhenCreated" />
+                <ScalarProperty Name="FishType" ColumnName="FishType" />
+                <ScalarProperty Name="VolumeChangePercentage" ColumnName="VolumeChangePercentage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CompanyLists">
             <EntityTypeMapping TypeName="TheFishModel.CompanyList">
               <MappingFragment StoreEntitySet="CompanyList">
@@ -97,21 +113,6 @@
                 <ScalarProperty Name="industry" ColumnName="industry" />
                 <ScalarProperty Name="SummaryQuote" ColumnName="SummaryQuote" />
                 <ScalarProperty Name="Exchange" ColumnName="Exchange" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CaughtFish">
-            <EntityTypeMapping TypeName="TheFishModel.CaughtFish">
-              <MappingFragment StoreEntitySet="CaughtFish">
-                <ScalarProperty Name="WhenCreated" ColumnName="WhenCreated" />
-                <ScalarProperty Name="FishType" ColumnName="FishType" />
-                <ScalarProperty Name="IsMessageSent" ColumnName="IsMessageSent" />
-                <ScalarProperty Name="PriceChangePercentage" ColumnName="PriceChangePercentage" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="VolumeChangePercentage" ColumnName="VolumeChangePercentage" />
-                <ScalarProperty Name="Volume" ColumnName="Volume" />
-                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

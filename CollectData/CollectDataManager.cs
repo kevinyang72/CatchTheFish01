@@ -7,11 +7,11 @@ using System.Data.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CatchTheFish.DbEntities;
-using Jarloo.CardStock.Helpers;
-using Jarloo.CardStock.Models;
+using Stock.Models;
+using Stock.StockFetcher;
+using Stock.StockAnalyzer;
+using Core.Log;
 using Core.Messaging;
-using CatchTheFish.CollectData.Models;
-
 
 namespace CatchTheFish.CollectData
 {
@@ -82,11 +82,9 @@ namespace CatchTheFish.CollectData
 
             using (var db = new TheFishEntities())
             {
-                var analyzer = new StockAnalyzer();
-                
                 foreach(var item in quoteList.ToList())
                 {
-                    var result = analyzer.AnalyzeStock(item);
+                    var result = StockAnalyzer.AnalyzeStock(item);
                     var isPriceChangeFish = result.IsPriceChangedDramatically;
                     var isVolumeChangeFish = result.IsVolumeAbnormal;
                     var isPrice52WeeksLow = result.IsPrice52WeeksLow;

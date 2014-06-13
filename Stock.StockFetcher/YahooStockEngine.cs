@@ -1,18 +1,10 @@
-﻿/*
-    Jarloo
-    http://jarloo.com
- 
-    This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License  
-    http://creativecommons.org/licenses/by-sa/3.0/     
-
-*/
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Xml.Linq;
-using Jarloo.CardStock.Models;
+using Stock.Models;
 
-namespace Jarloo.CardStock.Helpers
+namespace Stock.StockFetcher
 {
     public class YahooStockEngine
     {

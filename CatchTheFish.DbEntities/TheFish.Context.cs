@@ -25,7 +25,7 @@ namespace CatchTheFish.DbEntities
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CompanyList> CompanyLists { get; set; }
         public virtual DbSet<CaughtFish> CaughtFish { get; set; }
+        public virtual DbSet<CompanyList> CompanyLists { get; set; }
     }
 }

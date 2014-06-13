@@ -35,6 +35,10 @@
     <Reference Include="CatchTheFish.DbEntities">
       <HintPath>..\Bin\CatchTheFish.DbEntities.dll</HintPath>
     </Reference>
+    <Reference Include="Core.Log, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Bin\Core.Log.dll</HintPath>
+    </Reference>
     <Reference Include="Core.Messaging">
       <HintPath>..\Bin\Core.Messaging.dll</HintPath>
     </Reference>
@@ -43,6 +47,18 @@
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Stock.Models, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Bin\Stock.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="Stock.StockAnalyzer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Bin\Stock.StockAnalyzer.dll</HintPath>
+    </Reference>
+    <Reference Include="Stock.StockFetcher, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Bin\Stock.StockFetcher.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -60,10 +76,6 @@
     <Compile Include="Models\StockQuote.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StockAnalyzer.cs" />
-    <Compile Include="StockAnalyzerResult.cs" />
-    <Compile Include="YahooStockDownoad.cs" />
-    <Compile Include="YahooStockEngine.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

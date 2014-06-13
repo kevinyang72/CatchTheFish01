@@ -17,11 +17,11 @@ namespace CatchTheFish.DbEntities
         public long Id { get; set; }
         public string Symbol { get; set; }
         public Nullable<decimal> Volume { get; set; }
-        public Nullable<decimal> VolumeChangePercentage { get; set; }
         public Nullable<decimal> Price { get; set; }
         public Nullable<decimal> PriceChangePercentage { get; set; }
         public Nullable<int> IsMessageSent { get; set; }
-        public int FishType { get; set; }
         public System.DateTime WhenCreated { get; set; }
+        public Nullable<int> FishType { get; set; }
+        public Nullable<decimal> VolumeChangePercentage { get; set; }
     }
 }

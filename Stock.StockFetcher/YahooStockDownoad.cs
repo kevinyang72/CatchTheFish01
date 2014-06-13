@@ -5,9 +5,9 @@ using System.Text;
 using System.Net;
 using System.IO;
 using System.Threading.Tasks;
-using CatchTheFish.CollectData.Models;
+using Stock.Models;
 
-namespace CatchTheFish.CollectData
+namespace Stock.StockFetcher
 {
     public class YahooStockDownoad
     {
@@ -75,7 +75,6 @@ namespace CatchTheFish.CollectData
                 // Handle exceptions.
             }
                 // Return the stock quote data in XML format.
-            return quoteList;
         }        
     }
 }
