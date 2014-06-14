@@ -26,6 +26,8 @@ namespace CatchTheFish.CollectData
 
         public static void ScanStocks()
         {
+            Log.Error(typeof(CollectDataManager),"Test tets");
+            Log.Error(typeof(CollectDataManager), "Test tets 123", new Exception("Failed to test"));
             var engine = new YahooStockEngine();
             
             var quoteList = new ObservableCollection<Quote>();
