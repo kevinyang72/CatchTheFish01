@@ -9,9 +9,9 @@ using Stock.Models;
 
 namespace Stock.StockFetcher
 {
-    public class YahooStockDownoad
+    public class YahooStockDownoader
     {
-        public static void GetQuote(ref Dictionary<string, StockQuote> symbolList)
+        public static void GetQuote(List<Quote> quotes)
         {
             // Set the return string to null.
             var quoteList = new List<StockQuote>();
@@ -19,8 +19,8 @@ namespace Stock.StockFetcher
             {
                 // Use Yahoo finance service to download stock data from Yahoo
                 var symbols = "";
-                foreach (var symbol in symbolList.Keys)
-                    symbols += symbols + ",";
+                foreach (var symbol in quotes)
+                    symbols += symbol.Symbol + ",";
                 string yahooURL = @"http://download.finance.yahoo.com/d/quotes.csv?s=" +
                                   symbols + "&f=,l1c6k2oghjkva2j1";
                 
@@ -29,16 +29,15 @@ namespace Stock.StockFetcher
                 // Get the response from the Internet resource.
                 HttpWebResponse webresp = (HttpWebResponse)webreq.GetResponse();
                 // Read the body of the response from the server.
-                
+                var quoteDict = new Dictionary<string, Quote>();
                 using(var strm = new StreamReader(webresp.GetResponseStream(), Encoding.ASCII))
                 {
                     // Construct a XML in string format.
-                    
-                    foreach(var symbol in symbolList.Keys)
+                    foreach (var item in quotes)
                     {
                         try
                         {
-                            if (symbol.Trim() == "")
+                            if (item.Symbol.Trim() == "")
                                 continue;
                             var quote = new StockQuote();
                             var content = strm.ReadLine().Replace("\"", "");
@@ -50,23 +49,23 @@ namespace Stock.StockFetcher
                             }
                             else
                             {
-                                //construct XML via strings.
-                                quote.Ticker = contents[0];
-                                quote.LastTrade = Convert.ToDecimal(contents[1]);
-                                quote.Change = Convert.ToDecimal(contents[2]);
-                                quote.ChangePct = contents[3];
-                                quote.Open = Convert.ToDecimal(contents[3]);
-                                quote.Low = Convert.ToDecimal(contents[4]);
-                                quote.High = Convert.ToDecimal(contents[5]);
-                                quote.Low52 = Convert.ToDecimal(contents[6]);
-                                quote.High52 = Convert.ToDecimal(contents[7]);
-                                quote.Volume = Convert.ToDecimal(contents[8]);
-                                quote.AvgVolume = Convert.ToDecimal(contents[9]);
-                                quote.MarketCapX = contents[10];
+                                var quoteFromDownloader = new Quote(contents[0]);
+                                
+                                quoteFromDownloader.Symbol = contents[0];
+                                quoteFromDownloader.YearlyLow = Convert.ToDecimal(contents[6]);
+                                quoteFromDownloader.YearlyHigh = Convert.ToDecimal(contents[7]);
+                                quoteDict.Add(quoteFromDownloader.Symbol, quoteFromDownloader);
                             }
-                            symbolList[quote.Ticker] = quote;
                         }catch(Exception ex)
                         { }
+                    }
+                }
+                foreach(var item in quotes)
+                {
+                    if(quoteDict.ContainsKey(item.Symbol))
+                    {
+                        item.Price52WeeksLow = quoteDict[item.Symbol].Price52WeeksLow;
+                        item.Price52WeeksHigh = quoteDict[item.Symbol].Price52WeeksHigh;
                     }
                 }
             }

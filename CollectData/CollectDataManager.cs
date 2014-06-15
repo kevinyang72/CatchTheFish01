@@ -38,8 +38,7 @@ namespace CatchTheFish.CollectData
             }
 
             int i = 1;
-            var quoteSingleCollectionTrunk = new ObservableCollection<Quote>();
-            var quoteYahooDownloadDict = new Dictionary<string, StockQuote>();
+            var quoteSingleCollectionChunk = new List<Quote>();
             foreach(var item in boList)
             {
                 //if (i > 2)
@@ -48,14 +47,14 @@ namespace CatchTheFish.CollectData
                 {
                     
                     var quote = new Quote(item.Symbol.Trim());
-                    quoteSingleCollectionTrunk.Add(quote);
-                    quoteYahooDownloadDict.Add(item.Symbol, null);
+                    quoteSingleCollectionChunk.Add(quote);
                     if (i == StockFetchTrunk)
                     {
-                        YahooStockEngine.Fetch(quoteSingleCollectionTrunk);
-                        foreach (var stockInfo in quoteSingleCollectionTrunk)
+                        YahooStockEngine.Fetch(quoteSingleCollectionChunk);
+                        //YahooStockDownoader.GetQuote(quoteSingleCollectionChunk);
+                        foreach (var stockInfo in quoteSingleCollectionChunk)
                             quoteList.Add(stockInfo);
-                        quoteSingleCollectionTrunk = new ObservableCollection<Quote>();
+                        quoteSingleCollectionChunk = new List<Quote>();
                         i = 1;
                     }
                     i++;
@@ -68,10 +67,11 @@ namespace CatchTheFish.CollectData
 
             try
             {
-                if (quoteSingleCollectionTrunk.Count > 0)
+                if (quoteSingleCollectionChunk.Count > 0)
                 {
-                    YahooStockEngine.Fetch(quoteSingleCollectionTrunk);
-                    foreach (var stockInfo in quoteSingleCollectionTrunk)
+                    YahooStockEngine.Fetch(quoteSingleCollectionChunk);
+                    //YahooStockDownoader.GetQuote(quoteSingleCollectionChunk);
+                    foreach (var stockInfo in quoteSingleCollectionChunk)
                         quoteList.Add(stockInfo);
                 }
             }catch(Exception ex)

@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using Stock.Models;
@@ -10,7 +10,7 @@ namespace Stock.StockFetcher
     {
         private const string BASE_URL = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20({0})&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
 
-        public static void Fetch(ObservableCollection<Quote> quotes)
+        public static void Fetch(List<Quote> quotes)
         {
             string symbolList = String.Join("%2C", quotes.Select(w => "%22" + w.Symbol + "%22").ToArray());
             string url = string.Format(BASE_URL,symbolList);
@@ -19,7 +19,7 @@ namespace Stock.StockFetcher
             Parse(quotes,doc);
         }
 
-        private static void Parse(ObservableCollection<Quote> quotes, XDocument doc)
+        private static void Parse(List<Quote> quotes, XDocument doc)
         {
             XElement results = doc.Root.Element("results");
 

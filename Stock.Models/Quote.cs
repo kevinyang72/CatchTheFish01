@@ -145,8 +145,5 @@ namespace Stock.Models
 
         public string Symbol { get; set; }
 
-        public decimal? Price52WeeksLow { get; set; }
-
-        public decimal? Price52WeeksHigh { get; set; }
     }
 }
