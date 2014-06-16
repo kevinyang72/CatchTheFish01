@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Log;
+using System;
 
 namespace CatchTheFish.CollectData
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
+            StaticLog.Info("CollectData Start");
+            StaticLog.Error(new Exception("Staticlogger test"));
             CollectDataManager.ScanStocks();
+            StaticLog.Info("CollectData End");
         }
     }
 }

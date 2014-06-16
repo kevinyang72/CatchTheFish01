@@ -1,27 +1,32 @@
 ﻿
 using System;
+using System.ComponentModel;
 
 namespace Stock.Models
 {
     public class Quote
     {
-        public DateTime LastUpdate { get; set; }
-
-
-        public string StockExchange { get; set; }
-
-
-        public decimal? Volume { get; set; }
-
-        public decimal? PeRatio { get; set; }
-
-        public decimal? PercentChangeFromTwoHundredDayMovingAverage { get; set; }
-
         public Quote(string ticker)
         {
             Symbol = ticker;
         }
 
+        [DisplayName("Symbol")]
+        public string Symbol { get; set; }
+        [DisplayName("Stock Exchange")]
+        public string StockExchange { get; set; }
+        public decimal? LastTradePrice { get; set; }
+        public decimal? ChangeInPercent { get; set; }
+        public decimal? PreviousClose { get; set; }
+        public decimal? Open { get; set; }
+        public decimal? Volume { get; set; }
+        public decimal? YearlyHigh { get; set; }
+        public decimal? YearlyLow { get; set; }
+        public decimal? DailyHigh { get; set; }
+        public decimal? DailyLow { get; set; }
+        public decimal? PeRatio { get; set; }
+        [DisplayName("% Change From 200 Ave")]
+        public decimal? PercentChangeFromTwoHundredDayMovingAverage { get; set; }
         public DateTime? DividendPayDate { get; set; }
 
         public decimal? DividendYield { get; set; }
@@ -49,33 +54,19 @@ namespace Stock.Models
 
         public decimal? PriceSales { get; set; }
 
-
-        public decimal? ChangeInPercent { get; set; }
-
-
-        public decimal? PreviousClose { get; set; }
-
-
-        public decimal? Open { get; set; }
-
-
         public string Name { get; set; }
 
-
+        [DisplayName("% Change From 50 Ave")]
         public decimal? PercentChangeFromFiftyDayMovingAverage { get; set; }
 
-
+        [DisplayName("Change From 200 Ave")]
         public decimal? ChangeFromTwoHundredDayMovingAverage { get; set; }
 
-
+        [DisplayName("200 Day Ave")]
         public decimal? TwoHunderedDayMovingAverage { get; set; }
 
-
+        [DisplayName("50 Day Ave")]
         public decimal? FiftyDayMovingAverage { get; set; }
-
-
-        public decimal? LastTradePrice { get; set; }
-
 
         public decimal? PercentChangeFromYearHigh { get; set; }
 
@@ -93,18 +84,6 @@ namespace Stock.Models
 
 
         public decimal? MarketCapitalization { get; set; }
-
-
-        public decimal? YearlyHigh { get; set; }
-
-
-        public decimal? YearlyLow { get; set; }
-
-
-        public decimal? DailyHigh { get; set; }
-
-
-        public decimal? DailyLow { get; set; }
 
 
         public decimal? EpsEstimateNextQuarter { get; set; }
@@ -142,8 +121,7 @@ namespace Stock.Models
 
         public decimal? AverageDailyVolume { get; set; }
 
-
-        public string Symbol { get; set; }
-
+         
+         public DateTime LastUpdate { get; set; }
     }
 }
