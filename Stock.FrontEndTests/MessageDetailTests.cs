@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Stock.FrontEnd;
 using NUnit.Framework;
 using Stock.Models;
+using Core.Messaging;
 
 namespace Stock.FrontEnd.Tests
 {
@@ -16,9 +17,11 @@ namespace Stock.FrontEnd.Tests
         public void GetMessageDetailTest()
         {
             var quote = new Quote("SPPI");
-            quote.Symbol = "SPPI";
-            quote.LastTradePrice = 11.00M;
-            var result = MessageDetail.GetMessageDetail(quote);
+            var listQuotes = new List<Quote>();
+            listQuotes.Add(quote);
+            Stock.StockFetcher.YahooStockEngine.Fetch(listQuotes);
+            var result = MessageDetail.GetMessageDetail(listQuotes.FirstOrDefault());
+            Messaging.SendEmailGmail("Stock alert", result);
             Assert.Fail();
         }
     }

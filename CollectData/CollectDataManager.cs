@@ -7,6 +7,7 @@ using System.Data.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CatchTheFish.DbEntities;
+using Stock.FrontEnd;
 using Stock.Models;
 using Stock.StockFetcher;
 using Stock.StockAnalyzer;
@@ -26,9 +27,9 @@ namespace CatchTheFish.CollectData
 
         public static void ScanStocks()
         {
-            Log.Error(typeof(CollectDataManager), "Test 1");
-            Log.Error(typeof(CollectDataManager),"Test tets");
-            Log.Error(typeof(CollectDataManager), "Test tets 123", new Exception("Failed to test"));
+            //Log.Error(typeof(CollectDataManager), "Test 1");
+            //Log.Error(typeof(CollectDataManager),"Test tets");
+            //Log.Error(typeof(CollectDataManager), "Test tets 123", new Exception("Failed to test"));
             var engine = new YahooStockEngine();
             
             var quoteList = new ObservableCollection<Quote>();
@@ -87,46 +88,67 @@ namespace CatchTheFish.CollectData
             {
                 foreach(var item in quoteList.ToList())
                 {
-                    var result = StockAnalyzer.AnalyzeStock(item);
-                    var isPriceChangeFish = result.IsPriceChangedDramatically;
-                    var isVolumeChangeFish = result.IsVolumeAbnormal;
-                    var isPrice52WeeksLow = result.IsPrice52WeeksLow;
-                    if (!(isPriceChangeFish || isVolumeChangeFish || isPrice52WeeksLow))
-                        continue;
-                    if (db.CaughtFish.Where(x => x.Symbol.Equals(item.Symbol) && x.WhenCreated > today && x.WhenCreated<tomorrow).Any())
-                        continue;
-                    var caughtFish = new CaughtFish();
-                    caughtFish.Symbol = item.Symbol;
-                    caughtFish.WhenCreated = DateTime.Now;
-                    caughtFish.Price = item.LastTradePrice;
-                    caughtFish.PriceChangePercentage = item.ChangeInPercent;
-                    caughtFish.Volume = item.Volume;
-                    if(item.AverageDailyVolume> 0 && item.Volume>0)
-                        caughtFish.VolumeChangePercentage = (int)(0.5M + 100M * (item.Volume - item.AverageDailyVolume) / item.AverageDailyVolume);
-                    var message = "";
-                    var subject = "";
-                    if (isPriceChangeFish)
+                    try
                     {
-                        caughtFish.FishType = 0;
-                        message = string.Format(MessageText, "Price Change Alert -- ", caughtFish.Symbol, caughtFish.Price.ToString(), caughtFish.PriceChangePercentage.ToString(), caughtFish.Volume.ToString(), caughtFish.VolumeChangePercentage);
-                        subject = " Price Drop Alert -- " + caughtFish.Symbol;
+                        var result = StockAnalyzer.AnalyzeStock(item);
+                        var isPriceChangeFish = result.IsPriceChangedDramatically;
+                        var isVolumeChangeFish = result.IsVolumeAbnormal;
+                        var isPrice52WeeksLow = result.IsPrice52WeeksLow;
+                        if (!(isPriceChangeFish || isVolumeChangeFish || isPrice52WeeksLow))
+                            continue;
+                        if (
+                            db.CaughtFish.Where(
+                                x => x.Symbol.Equals(item.Symbol) && x.WhenCreated > today && x.WhenCreated < tomorrow)
+                              .Any())
+                            continue;
+                        var caughtFish = new CaughtFish();
+                        caughtFish.Symbol = item.Symbol;
+                        caughtFish.WhenCreated = DateTime.Now;
+                        caughtFish.Price = item.LastTradePrice;
+                        caughtFish.PriceChangePercentage = item.ChangeInPercent;
+                        caughtFish.Volume = item.Volume;
+                        if (item.AverageDailyVolume > 0 && item.Volume > 0)
+                            caughtFish.VolumeChangePercentage =
+                                (int) (0.5M + 100M*(item.Volume - item.AverageDailyVolume)/item.AverageDailyVolume);
+                        var message = "";
+                        var subject = "";
+                        if (isPriceChangeFish)
+                        {
+                            caughtFish.FishType = 0;
+                            message = string.Format(MessageText, "Price Change Alert -- ", caughtFish.Symbol,
+                                                    caughtFish.Price.ToString(),
+                                                    caughtFish.PriceChangePercentage.ToString(),
+                                                    caughtFish.Volume.ToString(), caughtFish.VolumeChangePercentage);
+                            subject = " Price Drop Alert -- " + caughtFish.Symbol;
+                        }
+                        else if (isVolumeChangeFish)
+                        {
+                            caughtFish.FishType = 1;
+                            message = string.Format(MessageText, "Volume Change Alert -- ", caughtFish.Symbol,
+                                                    caughtFish.Price.ToString(),
+                                                    caughtFish.PriceChangePercentage.ToString(),
+                                                    caughtFish.Volume.ToString(),
+                                                    caughtFish.VolumeChangePercentage.ToString());
+                            subject = " Volumne Change Alert -- " + caughtFish.Symbol;
+                        }
+                        else if (isPrice52WeeksLow)
+                        {
+                            caughtFish.FishType = 1;
+                            message = string.Format(MessageText, "52 Weeks low price Alert -- ", caughtFish.Symbol,
+                                                    caughtFish.Price.ToString(),
+                                                    caughtFish.PriceChangePercentage.ToString(),
+                                                    caughtFish.Volume.ToString(),
+                                                    caughtFish.VolumeChangePercentage.ToString());
+                            subject = " 52 Weeks Low Alert -- " + caughtFish.Symbol;
+                        }
+                        db.CaughtFish.Add(caughtFish);
+                        db.SaveChanges();
+                        Messaging.SendEmailGmail(subject, MessageDetail.GetMessageDetail(item));
                     }
-                    else if (isVolumeChangeFish)
+                    catch (Exception ex)
                     {
-                        caughtFish.FishType = 1;
-                        message = string.Format(MessageText, "Volume Change Alert -- ", caughtFish.Symbol, caughtFish.Price.ToString(), caughtFish.PriceChangePercentage.ToString(), caughtFish.Volume.ToString(), caughtFish.VolumeChangePercentage.ToString());
-                        subject = " Volumne Change Alert -- " + caughtFish.Symbol;
+                        StaticLog.Error(ex);
                     }
-                    else if (isPrice52WeeksLow)
-                    {
-                        caughtFish.FishType = 1;
-                        message = string.Format(MessageText, "52 Weeks low price Alert -- ", caughtFish.Symbol, caughtFish.Price.ToString(), caughtFish.PriceChangePercentage.ToString(), caughtFish.Volume.ToString(), caughtFish.VolumeChangePercentage.ToString());
-                        subject = " 52 Weeks Low Alert -- " + caughtFish.Symbol;
-                    }
-                    db.CaughtFish.Add(caughtFish);
-                    db.SaveChanges();
-                    Messaging.SendEmailGmail(subject, message);
-                    //}
                 }
             }
         }

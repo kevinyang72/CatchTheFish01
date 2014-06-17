@@ -35,11 +35,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Core.Messaging">
+      <HintPath>..\Bin\Core.Messaging.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="Stock.Models">
       <HintPath>..\Bin\Stock.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="Stock.StockFetcher">
+      <HintPath>..\Bin\Stock.StockFetcher.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>

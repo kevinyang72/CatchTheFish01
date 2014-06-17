@@ -6,6 +6,7 @@ using System.Net;
 using System.IO;
 using System.Threading.Tasks;
 using Stock.Models;
+using Core.Log;
 
 namespace Stock.StockFetcher
 {
@@ -57,7 +58,9 @@ namespace Stock.StockFetcher
                             }
                         }
                         catch (Exception ex)
-                        { }
+                        {
+                            StaticLog.Error(ex);
+                        }
                     }
                 }
                 foreach (var item in quotes)
@@ -69,9 +72,9 @@ namespace Stock.StockFetcher
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                // Handle exceptions.
+                StaticLog.Error(ex);
             }
             // Return the stock quote data in XML format.
         }
