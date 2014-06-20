@@ -22,7 +22,7 @@ namespace Stock.FrontEnd.Tests
             Stock.StockFetcher.YahooStockEngine.Fetch(listQuotes);
             var result = MessageDetail.GetMessageDetail(listQuotes.FirstOrDefault());
             Messaging.SendEmailGmail("Stock alert", result);
-            Assert.Fail();
+            //Assert.Fail();
         }
     }
 }
