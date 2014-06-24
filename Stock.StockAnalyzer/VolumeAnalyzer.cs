@@ -14,6 +14,8 @@ namespace Stock.StockAnalyzer
         public static bool IsVolumeAbnormal(Quote quote)
         {
             var averageVolume = quote.AverageDailyVolume;
+            if (averageVolume < 300000)
+                return false; 
             var volume = quote.Volume;
 
             if (volume > averageVolume && averageVolume > 0)
