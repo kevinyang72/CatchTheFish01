@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatchTheFish.CollectData", "CollectData\CatchTheFish.CollectData.csproj", "{6A3DD87E-9EF8-4E1B-897F-66D1BEDB4602}"
 	ProjectSection(ProjectDependencies) = postProject
 		{BBCAE507-A401-4951-B944-4C538131B6F6} = {BBCAE507-A401-4951-B944-4C538131B6F6}
@@ -20,6 +22,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stock.StockFetcher", "Stock.StockFetcher\Stock.StockFetcher.csproj", "{0362966B-6D6F-491B-808F-2A7B6205730D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stock.StockAnalyzer", "Stock.StockAnalyzer\Stock.StockAnalyzer.csproj", "{BBCAE507-A401-4951-B944-4C538131B6F6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{604C90BA-664B-4CD1-AF0D-4ED03182DCE5} = {604C90BA-664B-4CD1-AF0D-4ED03182DCE5}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stock.Models", "Stock.Models\Stock.Models.csproj", "{604C90BA-664B-4CD1-AF0D-4ED03182DCE5}"
 EndProject
@@ -28,6 +33,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stock.FrontEnd", "Stock.FrontEnd\Stock.FrontEnd.csproj", "{B70B6A3E-82BA-4C3E-A1C9-51E6147144AD}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C0212E92-E1CF-4ECC-84CA-56C2F6C14217} = {C0212E92-E1CF-4ECC-84CA-56C2F6C14217}
+		{604C90BA-664B-4CD1-AF0D-4ED03182DCE5} = {604C90BA-664B-4CD1-AF0D-4ED03182DCE5}
 		{5625B0E4-A812-4809-A6C8-0CEF7F516085} = {5625B0E4-A812-4809-A6C8-0CEF7F516085}
 		{643C7DEF-210F-41D4-91AA-1C659A3EC6CD} = {643C7DEF-210F-41D4-91AA-1C659A3EC6CD}
 	EndProjectSection

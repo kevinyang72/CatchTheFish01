@@ -25,6 +25,9 @@ namespace Stock.StockAnalyzer
 
         public static bool IsPrice52WeeksLow(Quote quote)
         {
+            var averageVolume = quote.AverageDailyVolume;
+            if (averageVolume < 300000)
+                return false;  
             if (quote.LastTradePrice < quote.YearlyLow)
                 return true;
             return false;
