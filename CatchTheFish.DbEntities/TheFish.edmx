@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TheFishModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TheFishModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CaughtFish">
           <Key>
             <PropertyRef Name="Id" />
@@ -35,12 +35,23 @@
           <Property Name="SummaryQuote" Type="nvarchar" MaxLength="255" />
           <Property Name="Exchange" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
+        <EntityType Name="FdaCalendar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Symbol" Type="nvarchar" MaxLength="20" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="CatalystDate" Type="datetime" />
+          <Property Name="CatelystNotes" Type="nvarchar" MaxLength="2000" />
+          <Property Name="LastMoidfiedDate" Type="datetime" />
+        </EntityType>
         <EntityContainer Name="TheFishModelStoreContainer">
           <EntitySet Name="CaughtFish" EntityType="Self.CaughtFish" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompanyList" EntityType="Self.CompanyList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FdaCalendar" EntityType="Self.FdaCalendar" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TheFishModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -77,7 +88,19 @@
         <EntityContainer Name="TheFishEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CaughtFish" EntityType="Self.CaughtFish" />
           <EntitySet Name="CompanyLists" EntityType="Self.CompanyList" />
+          <EntitySet Name="FdaCalendars" EntityType="TheFishModel.FdaCalendar" />
         </EntityContainer>
+        <EntityType Name="FdaCalendar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Symbol" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CatalystDate" Type="DateTime" Precision="3" />
+          <Property Name="CatelystNotes" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="LastMoidfiedDate" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -113,6 +136,18 @@
                 <ScalarProperty Name="industry" ColumnName="industry" />
                 <ScalarProperty Name="SummaryQuote" ColumnName="SummaryQuote" />
                 <ScalarProperty Name="Exchange" ColumnName="Exchange" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FdaCalendars">
+            <EntityTypeMapping TypeName="TheFishModel.FdaCalendar">
+              <MappingFragment StoreEntitySet="FdaCalendar">
+                <ScalarProperty Name="LastMoidfiedDate" ColumnName="LastMoidfiedDate" />
+                <ScalarProperty Name="CatelystNotes" ColumnName="CatelystNotes" />
+                <ScalarProperty Name="CatalystDate" ColumnName="CatalystDate" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

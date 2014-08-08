@@ -27,5 +27,6 @@ namespace CatchTheFish.DbEntities
     
         public virtual DbSet<CaughtFish> CaughtFish { get; set; }
         public virtual DbSet<CompanyList> CompanyLists { get; set; }
+        public virtual DbSet<FdaCalendar> FdaCalendars { get; set; }
     }
 }
