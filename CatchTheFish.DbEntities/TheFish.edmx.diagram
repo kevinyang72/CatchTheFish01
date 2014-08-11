@@ -7,7 +7,7 @@
       <Diagram DiagramId="fe4f06f567514b1b989d24a8e67b4fa0" Name="Diagram1">
         <EntityTypeShape EntityType="TheFishModel.CaughtFish" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TheFishModel.CompanyList" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TheFishModel.FdaCalendar" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="TheFishModel.FdaCalendar" Width="1.5" PointX="4.75" PointY="0.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

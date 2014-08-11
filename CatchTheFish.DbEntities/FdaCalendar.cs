@@ -20,5 +20,7 @@ namespace CatchTheFish.DbEntities
         public Nullable<System.DateTime> CatalystDate { get; set; }
         public string CatelystNotes { get; set; }
         public Nullable<System.DateTime> LastMoidfiedDate { get; set; }
+        public Nullable<decimal> Price { get; set; }
+        public string MarketCapital { get; set; }
     }
 }

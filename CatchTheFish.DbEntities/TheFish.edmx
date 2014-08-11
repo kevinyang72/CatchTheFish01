@@ -41,6 +41,8 @@
           </Key>
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Symbol" Type="nvarchar" MaxLength="20" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="MarketCapital" Type="nvarchar" MaxLength="20" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
           <Property Name="CatalystDate" Type="datetime" />
           <Property Name="CatelystNotes" Type="nvarchar" MaxLength="2000" />
@@ -100,6 +102,8 @@
           <Property Name="CatalystDate" Type="DateTime" Precision="3" />
           <Property Name="CatelystNotes" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
           <Property Name="LastMoidfiedDate" Type="DateTime" Precision="3" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="MarketCapital" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -142,6 +146,8 @@
           <EntitySetMapping Name="FdaCalendars">
             <EntityTypeMapping TypeName="TheFishModel.FdaCalendar">
               <MappingFragment StoreEntitySet="FdaCalendar">
+                <ScalarProperty Name="MarketCapital" ColumnName="MarketCapital" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="LastMoidfiedDate" ColumnName="LastMoidfiedDate" />
                 <ScalarProperty Name="CatelystNotes" ColumnName="CatelystNotes" />
                 <ScalarProperty Name="CatalystDate" ColumnName="CatalystDate" />
