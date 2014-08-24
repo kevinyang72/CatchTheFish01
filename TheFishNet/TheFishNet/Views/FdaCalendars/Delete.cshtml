@@ -1,0 +1,80 @@
+﻿@model CatchTheFish.DbEntities.FdaCalendar
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>FdaCalendar</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Symbol)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Symbol)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CatalystDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CatalystDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CatelystNotes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CatelystNotes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastMoidfiedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastMoidfiedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MarketCapital)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MarketCapital)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

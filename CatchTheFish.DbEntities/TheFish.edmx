@@ -41,17 +41,40 @@
           </Key>
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Symbol" Type="nvarchar" MaxLength="20" />
-          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
           <Property Name="MarketCapital" Type="nvarchar" MaxLength="20" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
           <Property Name="CatalystDate" Type="datetime" />
           <Property Name="CatelystNotes" Type="nvarchar" MaxLength="2000" />
           <Property Name="LastMoidfiedDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="MyPortfolio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nchar" MaxLength="10" />
+          <Property Name="LastModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="MyPortfolioStock">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PortotfolioName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Symbol" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="DisplayOrder" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Volume" Type="int" />
+          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="TheFishModelStoreContainer">
           <EntitySet Name="CaughtFish" EntityType="Self.CaughtFish" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompanyList" EntityType="Self.CompanyList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FdaCalendar" EntityType="Self.FdaCalendar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MyPortfolio" EntityType="Self.MyPortfolio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MyPortfolioStock" EntityType="Self.MyPortfolioStock" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -91,6 +114,8 @@
           <EntitySet Name="CaughtFish" EntityType="Self.CaughtFish" />
           <EntitySet Name="CompanyLists" EntityType="Self.CompanyList" />
           <EntitySet Name="FdaCalendars" EntityType="TheFishModel.FdaCalendar" />
+          <EntitySet Name="MyPortfolios" EntityType="TheFishModel.MyPortfolio" />
+          <EntitySet Name="MyPortfolioStocks" EntityType="TheFishModel.MyPortfolioStock" />
         </EntityContainer>
         <EntityType Name="FdaCalendar">
           <Key>
@@ -102,8 +127,29 @@
           <Property Name="CatalystDate" Type="DateTime" Precision="3" />
           <Property Name="CatelystNotes" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
           <Property Name="LastMoidfiedDate" Type="DateTime" Precision="3" />
-          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="MarketCapital" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MyPortfolio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="MyPortfolioStock">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PortotfolioName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Symbol" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayOrder" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Volume" Type="Int32" />
+          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -153,6 +199,29 @@
                 <ScalarProperty Name="CatalystDate" ColumnName="CatalystDate" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MyPortfolios">
+            <EntityTypeMapping TypeName="TheFishModel.MyPortfolio">
+              <MappingFragment StoreEntitySet="MyPortfolio">
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MyPortfolioStocks">
+            <EntityTypeMapping TypeName="TheFishModel.MyPortfolioStock">
+              <MappingFragment StoreEntitySet="MyPortfolioStock">
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+                <ScalarProperty Name="PortotfolioName" ColumnName="PortotfolioName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

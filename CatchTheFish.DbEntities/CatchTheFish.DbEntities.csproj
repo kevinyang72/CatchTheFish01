@@ -60,6 +60,12 @@
     <Compile Include="FdaCalendar.cs">
       <DependentUpon>TheFish.tt</DependentUpon>
     </Compile>
+    <Compile Include="MyPortfolio.cs">
+      <DependentUpon>TheFish.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MyPortfolioStock.cs">
+      <DependentUpon>TheFish.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TheFish.Context.cs">
       <AutoGen>True</AutoGen>

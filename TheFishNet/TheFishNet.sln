@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheFishNet", "TheFishNet\TheFishNet.csproj", "{04501C48-943A-4CCF-BBD7-5694BF9BE81D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheFishNet.Tests", "TheFishNet.Tests\TheFishNet.Tests.csproj", "{663A8B26-9256-4D13-9CAC-F0959CDBC2B3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{A252584C-745D-492C-B31E-053D82FD531F}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\AzureWebsitePublishModule.psm1 = PublishScripts\AzureWebsitePublishModule.psm1
+		PublishScripts\Publish-WebApplicationWebsite.ps1 = PublishScripts\Publish-WebApplicationWebsite.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configurations", "{B3CCC7E4-F116-4628-A363-F74E5E16D976}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Configurations\TheFishNet-WAWS-dev.json = PublishScripts\Configurations\TheFishNet-WAWS-dev.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{04501C48-943A-4CCF-BBD7-5694BF9BE81D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04501C48-943A-4CCF-BBD7-5694BF9BE81D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04501C48-943A-4CCF-BBD7-5694BF9BE81D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04501C48-943A-4CCF-BBD7-5694BF9BE81D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{663A8B26-9256-4D13-9CAC-F0959CDBC2B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{663A8B26-9256-4D13-9CAC-F0959CDBC2B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{663A8B26-9256-4D13-9CAC-F0959CDBC2B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{663A8B26-9256-4D13-9CAC-F0959CDBC2B3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B3CCC7E4-F116-4628-A363-F74E5E16D976} = {A252584C-745D-492C-B31E-053D82FD531F}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,74 @@
+﻿@model CatchTheFish.DbEntities.FdaCalendar
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>FdaCalendar</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Symbol)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Symbol)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CatalystDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CatalystDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CatelystNotes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CatelystNotes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastMoidfiedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastMoidfiedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MarketCapital)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MarketCapital)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
