@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<CatchTheFish.DbEntities.FdaCalendar>
 
 @{
-    ViewBag.Title = "Fda Canlendars";
+    ViewBag.Title = "Fda Canlendars All";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -20,7 +20,7 @@
         <th>
             @Html.DisplayNameFor(model => model.CatalystDate)
         </th>
-        <th>
+        <th class="hidden-xs hidden-sm">
             @Html.DisplayNameFor(model => model.CatelystNotes)
         </th>
         @*<th>
@@ -46,7 +46,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.CatalystDate)
         </td>
-        <td>
+        <td class="hidden-xs hidden-sm">
             @Html.DisplayFor(modelItem => item.CatelystNotes)
         </td>
         @*<td>
