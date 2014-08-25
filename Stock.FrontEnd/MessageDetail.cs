@@ -8,7 +8,7 @@ namespace Stock.FrontEnd
     public class MessageDetail
     {
         private const int DisplayColumns = 1;
-        private const string YahooFianceLink = "<a href=\"http://finance.yahoo.com/q?s={0}\">Yahoo Finance -- {0}</a>";
+        private const string YahooFinanceLink = "<a href=\"http://finance.yahoo.com/q?s={0}\">Yahoo Finance -- {0}</a>";
         public static string GetMessageDetail(Quote quote)
         {
             var sb = new StringBuilder();

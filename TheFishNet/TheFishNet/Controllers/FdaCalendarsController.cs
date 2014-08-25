@@ -15,14 +15,16 @@ namespace TheFishNet.Controllers
         private TheFishEntities db = new TheFishEntities();
 
         // GET: FdaCalendars
-        public ActionResult Index(long? id)
+        public ActionResult Index(string id)
         {
             if (id == null)
             {
+                ViewBag.Title = "Fda Canlendars All";
                 return View(db.FdaCalendars.ToList());
             }
             else
             {
+                ViewBag.Title = "My Fda Canlendars";
                 var nowDate = DateTime.Now.AddDays(-1);
                 return View(db.FdaCalendars.Where(x => x.Price < 10
                     && (x.Type.Equals("PDUFA", StringComparison.OrdinalIgnoreCase) || x.Type.Equals("Advisory Committee", StringComparison.OrdinalIgnoreCase))

@@ -1,8 +1,5 @@
 ﻿@model IEnumerable<CatchTheFish.DbEntities.FdaCalendar>
 
-@{
-    ViewBag.Title = "Fda Canlendars All";
-}
 
 <h2>@ViewBag.Title</h2>
 
@@ -30,7 +27,7 @@
             @Html.DisplayNameFor(model => model.Price)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MarketCapital)
+            Capital@*@Html.DisplayNameFor(model => model.MarketCapital)*@
         </th>
         @*<th></th>*@
     </tr>
@@ -38,8 +35,9 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Symbol)
-        </td>
+            @{var symbol = item.Symbol;}
+            <a href="http://finance.yahoo.com/q?s=@symbol">@Html.DisplayFor(modelItem => item.Symbol)</a>
+</td>
         <td>
             @Html.DisplayFor(modelItem => item.Type)
         </td>
