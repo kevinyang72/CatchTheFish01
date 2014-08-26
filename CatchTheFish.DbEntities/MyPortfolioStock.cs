@@ -15,11 +15,10 @@ namespace CatchTheFish.DbEntities
     public partial class MyPortfolioStock
     {
         public long Id { get; set; }
+        public long PortotfolioId { get; set; }
         public string PortotfolioName { get; set; }
         public string Symbol { get; set; }
         public int DisplayOrder { get; set; }
-        public Nullable<decimal> Price { get; set; }
-        public Nullable<int> Volume { get; set; }
         public System.DateTime LastModifiedDate { get; set; }
     }
 }

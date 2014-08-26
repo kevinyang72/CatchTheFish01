@@ -42,7 +42,7 @@
             @Html.DisplayFor(modelItem => item.Type)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CatalystDate)
+            @String.Format("{0:MM/dd/yyyy}", item.CatalystDate)
         </td>
         <td class="hidden-xs hidden-sm">
             @Html.DisplayFor(modelItem => item.CatelystNotes)

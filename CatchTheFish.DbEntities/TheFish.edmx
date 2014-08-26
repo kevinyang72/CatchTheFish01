@@ -5,6 +5,23 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="TheFishModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
         <EntityType Name="CaughtFish">
           <Key>
             <PropertyRef Name="Id" />
@@ -55,6 +72,7 @@
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Description" Type="nchar" MaxLength="10" />
+          <Property Name="DisplayOrder" Type="int" Nullable="false" />
           <Property Name="LastModifiedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="MyPortfolioStock">
@@ -62,14 +80,14 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PortotfolioId" Type="bigint" Nullable="false" />
           <Property Name="PortotfolioName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Symbol" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="DisplayOrder" Type="int" Nullable="false" />
-          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="Volume" Type="int" />
           <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityContainer Name="TheFishModelStoreContainer">
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CaughtFish" EntityType="Self.CaughtFish" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompanyList" EntityType="Self.CompanyList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FdaCalendar" EntityType="Self.FdaCalendar" Schema="dbo" store:Type="Tables" />
@@ -114,9 +132,10 @@
           <EntitySet Name="CaughtFish" EntityType="Self.CaughtFish" />
           <EntitySet Name="CompanyLists" EntityType="Self.CompanyList" />
           <EntitySet Name="FdaCalendars" EntityType="TheFishModel.FdaCalendar" />
+          <EntitySet Name="AspNetUsers" EntityType="TheFishModel.AspNetUser" />
           <EntitySet Name="MyPortfolios" EntityType="TheFishModel.MyPortfolio" />
           <EntitySet Name="MyPortfolioStocks" EntityType="TheFishModel.MyPortfolioStock" />
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="FdaCalendar">
           <Key>
             <PropertyRef Name="Id" />
@@ -130,6 +149,23 @@
           <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="MarketCapital" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="MyPortfolio">
           <Key>
             <PropertyRef Name="Id" />
@@ -137,6 +173,7 @@
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DisplayOrder" Type="Int32" Nullable="false" />
           <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="MyPortfolioStock">
@@ -144,14 +181,13 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PortotfolioId" Type="Int64" Nullable="false" />
           <Property Name="PortotfolioName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Symbol" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="DisplayOrder" Type="Int32" Nullable="false" />
-          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Volume" Type="Int32" />
           <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -203,10 +239,29 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="TheFishModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="MyPortfolios">
             <EntityTypeMapping TypeName="TheFishModel.MyPortfolio">
               <MappingFragment StoreEntitySet="MyPortfolio">
                 <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -217,16 +272,15 @@
             <EntityTypeMapping TypeName="TheFishModel.MyPortfolioStock">
               <MappingFragment StoreEntitySet="MyPortfolioStock">
                 <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="Volume" ColumnName="Volume" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
                 <ScalarProperty Name="Symbol" ColumnName="Symbol" />
                 <ScalarProperty Name="PortotfolioName" ColumnName="PortotfolioName" />
+                <ScalarProperty Name="PortotfolioId" ColumnName="PortotfolioId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

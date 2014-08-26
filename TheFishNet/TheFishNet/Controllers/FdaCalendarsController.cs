@@ -10,6 +10,7 @@ using CatchTheFish.DbEntities;
 
 namespace TheFishNet.Controllers
 {
+    [Authorize]
     public class FdaCalendarsController : Controller
     {
         private TheFishEntities db = new TheFishEntities();

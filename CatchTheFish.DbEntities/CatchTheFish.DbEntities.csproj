@@ -51,6 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AspNetUser.cs">
+      <DependentUpon>TheFish.tt</DependentUpon>
+    </Compile>
     <Compile Include="CaughtFish.cs">
       <DependentUpon>TheFish.tt</DependentUpon>
     </Compile>

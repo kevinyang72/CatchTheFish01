@@ -14,7 +14,7 @@ namespace Stock.FrontEnd
             var sb = new StringBuilder();
             sb.Append("<html><body><table>");
             sb.Append("<tr><td>");
-            sb.Append(string.Format(YahooFianceLink, quote.Symbol.Trim()));
+            sb.Append(string.Format(YahooFinanceLink, quote.Symbol.Trim()));
             sb.Append("</td></tr></table>");
             sb.Append("<table border=\"1\" style=\"border-collapse : collapse; border : 1px solid orange;\"><tr>");
             var i = DisplayColumns;
