@@ -12,6 +12,9 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.PortotfolioId)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.PortotfolioName)
         </th>
         <th>
@@ -19,12 +22,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.DisplayOrder)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Volume)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.LastModifiedDate)
@@ -35,6 +32,9 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.PortotfolioId)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.PortotfolioName)
         </td>
         <td>
@@ -42,12 +42,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DisplayOrder)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Volume)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.LastModifiedDate)
