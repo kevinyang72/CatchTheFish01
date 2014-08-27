@@ -70,6 +70,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProfileId" Type="uniqueidentifier" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Description" Type="nchar" MaxLength="10" />
           <Property Name="DisplayOrder" Type="int" Nullable="false" />
@@ -80,8 +81,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PortotfolioId" Type="bigint" Nullable="false" />
-          <Property Name="PortotfolioName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ProfileId" Type="uniqueidentifier" />
+          <Property Name="PortfolioId" Type="bigint" Nullable="false" />
+          <Property Name="PortfolioName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Symbol" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="DisplayOrder" Type="int" Nullable="false" />
           <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
@@ -171,6 +173,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProfileId" Type="Guid" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="DisplayOrder" Type="Int32" Nullable="false" />
@@ -181,8 +184,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PortotfolioId" Type="Int64" Nullable="false" />
-          <Property Name="PortotfolioName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ProfileId" Type="Guid" />
+          <Property Name="PortfolioId" Type="Int64" Nullable="false" />
+          <Property Name="PortfolioName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Symbol" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="DisplayOrder" Type="Int32" Nullable="false" />
           <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
@@ -264,6 +268,7 @@
                 <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ProfileId" ColumnName="ProfileId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -274,8 +279,9 @@
                 <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
                 <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
                 <ScalarProperty Name="Symbol" ColumnName="Symbol" />
-                <ScalarProperty Name="PortotfolioName" ColumnName="PortotfolioName" />
-                <ScalarProperty Name="PortotfolioId" ColumnName="PortotfolioId" />
+                <ScalarProperty Name="PortfolioName" ColumnName="PortfolioName" />
+                <ScalarProperty Name="PortfolioId" ColumnName="PortfolioId" />
+                <ScalarProperty Name="ProfileId" ColumnName="ProfileId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

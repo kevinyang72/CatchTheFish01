@@ -15,8 +15,9 @@ namespace CatchTheFish.DbEntities
     public partial class MyPortfolioStock
     {
         public long Id { get; set; }
-        public long PortotfolioId { get; set; }
-        public string PortotfolioName { get; set; }
+        public Nullable<System.Guid> ProfileId { get; set; }
+        public long PortfolioId { get; set; }
+        public string PortfolioName { get; set; }
         public string Symbol { get; set; }
         public int DisplayOrder { get; set; }
         public System.DateTime LastModifiedDate { get; set; }

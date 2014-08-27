@@ -173,6 +173,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FdaCalendarsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MyPortfoliosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -240,6 +241,11 @@
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Home\Edit.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\MyPortfolios\Create.cshtml" />
+    <Content Include="Views\MyPortfolios\Delete.cshtml" />
+    <Content Include="Views\MyPortfolios\Details.cshtml" />
+    <Content Include="Views\MyPortfolios\Edit.cshtml" />
+    <Content Include="Views\MyPortfolios\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -15,6 +15,7 @@ namespace CatchTheFish.DbEntities
     public partial class MyPortfolio
     {
         public long Id { get; set; }
+        public Nullable<System.Guid> ProfileId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public int DisplayOrder { get; set; }
