@@ -18,12 +18,15 @@ namespace TheFishNet.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View(db.MyPortfolioStocks.ToList());
+            var profileId = new Guid(User.Identity.GetUserId());
+            GetPortfolioDropDownList();
+            return View(db.MyPortfolioStocks.Where(x=>x.ProfileId==profileId).ToList());
         }
 
         // GET: Home/Details/5
         public ActionResult Details(long? id)
         {
+            var profileId = new Guid(User.Identity.GetUserId());
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -39,7 +42,6 @@ namespace TheFishNet.Controllers
         // GET: Home/Create
         public ActionResult Create()
         {
-            // User.
             var profileId = new Guid(User.Identity.GetUserId());
             ViewBag.PortfolioSelection = db.MyPortfolios.Where(x => x.ProfileId==profileId).Select(x => new SelectListItem
              {
@@ -97,6 +99,7 @@ namespace TheFishNet.Controllers
         // GET: Home/Edit/5
         public ActionResult Edit(long? id)
         {
+            var profileId = new Guid(User.Identity.GetUserId());
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -116,6 +119,7 @@ namespace TheFishNet.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,PortfolioId,PortfolioName,Symbol,DisplayOrder,LastModifiedDate")] MyPortfolioStock myPortfolioStock)
         {
+            var profileId = new Guid(User.Identity.GetUserId());
             if (ModelState.IsValid)
             {
                 db.Entry(myPortfolioStock).State = EntityState.Modified;
@@ -128,6 +132,7 @@ namespace TheFishNet.Controllers
         // GET: Home/Delete/5
         public ActionResult Delete(long? id)
         {
+            var profileId = new Guid(User.Identity.GetUserId());
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -145,10 +150,21 @@ namespace TheFishNet.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
+            var profileId = new Guid(User.Identity.GetUserId());
             MyPortfolioStock myPortfolioStock = db.MyPortfolioStocks.Find(id);
             db.MyPortfolioStocks.Remove(myPortfolioStock);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        private void GetPortfolioDropDownList()
+        {
+            var profileId = new Guid(User.Identity.GetUserId());
+            ViewBag.PortfolioSelection = db.MyPortfolios.Where(x => x.ProfileId == profileId).Select(x => new SelectListItem
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name
+            });
         }
 
         protected override void Dispose(bool disposing)
